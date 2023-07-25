@@ -28,7 +28,7 @@
       try {
         const mapboxToken = 'pk.eyJ1IjoibWFyYS1hZG1pbiIsImEiOiJjbGQ5djVhc3QwOW03M25ucHZzeG92Z2kwIn0.TWD6NPNUnQ4CemIKMCKEpg';
         const supabaseUrl = 'https://txtsljlkvthdlxjesaam.supabase.co';
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR4dHNsamxrdnRoZGx4amVzYWFtIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY4NjIwOTQyNCwiZXhwIjoyMDAxNzg1NDI0fQ.ycpuKTaNEqEP_zzXKRpt7XRs4VRLLQ5QFpF6xLPxvn4';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR4dHNsamxrdnRoZGx4amVzYWFtIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODYyMDk0MjQsImV4cCI6MjAwMTc4NTQyNH0.Ej2zVnCif-7Xe6yQkFX9ln7L1yV7UB8xyZARD1ePQSE';
         const regionId = 'recGdAgHmNvQOmbVo'; // Replace with your region ID
 
         mapboxgl.accessToken = mapboxToken;
@@ -41,12 +41,16 @@
         });
 
     
-        const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
+        const _supabase = supabase.createClient(supabaseUrl, supabaseKey, {
+                db: {
+                    schema: 'airtable',
+                },
+            });
 
         const { data, error } = await _supabase
           .from('incidents') // Replace 'incidents' with your table name
           .select('latitude, longitude')
-          .eq('region_id', regionId); // Filter incidents by region ID
+          //.eq('region_id', regionId); // Filter incidents by region ID
 
         if (error) {
           console.error(error);
