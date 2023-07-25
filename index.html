@@ -41,9 +41,9 @@
         });
 
     
-        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+        const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
-        const { data, error } = await supabase
+        const { data, error } = await _supabase
           .from('incidents') // Replace 'incidents' with your table name
           .select('latitude, longitude')
           .eq('region_id', regionId); // Filter incidents by region ID
