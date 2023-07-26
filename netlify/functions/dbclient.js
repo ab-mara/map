@@ -1,7 +1,7 @@
 // Netlify function to test our Supabase connection
 
 // Grab our credentials from a .env file or environment variables
-require('dotenv').config();
+//require('dotenv').config();
 const {
     DATABASE_URL,
     SUPABASE_SERVICE_API_KEY
